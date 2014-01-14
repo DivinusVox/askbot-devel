@@ -21,7 +21,7 @@ class SpacelessMiddleware(object):
         """strips whitespace from all documents
         whose content type is text/html
         """
-        if 'text/html' in response['Content-Type']:
+        if 'text/html' in response.get('Content-Type', ""):
             response.content = reduce_spaces_between_tags(response.content)
             response['Content-Length'] = str(len(response.content))
         return response
